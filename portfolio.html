@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio – Nguyễn Trường Sơn</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root{
+  --bg:#f7f8fc;--bg2:#ffffff;--bg3:#f0f2f8;
+  --accent:#2563eb;--accent-light:#eff4ff;--accent2:#0ea5e9;
+  --green:#10b981;--green-light:#ecfdf5;
+  --amber:#f59e0b;--amber-light:#fffbeb;
+  --purple:#7c3aed;--purple-light:#f5f3ff;
+  --red:#ef4444;--red-light:#fef2f2;
+  --text:#0f172a;--text2:#64748b;--text3:#94a3b8;
+  --border:#e2e8f0;--border2:#cbd5e1;
+  --shadow:0 1px 3px rgba(0,0,0,.06),0 4px 16px rgba(0,0,0,.04);
+  --shadow-md:0 4px 6px rgba(0,0,0,.05),0 10px 30px rgba(0,0,0,.08);
+  --radius:14px;--radius-sm:8px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.6;font-size:15px;}
+
+/* NAV (TAB ĐIỀU HƯỚNG LỚN TRÊN CÙNG) */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;
+  background:rgba(247,248,252,.92);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 3.5rem;height:60px;}
+.nav-logo{display:flex;align-items:center;gap:10px;}
+.nav-logo-dot{width:28px;height:28px;border-radius:8px;background:var(--accent);
+  display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:.75rem;}
+.nav-logo-name{font-weight:700;font-size:.92rem;color:var(--text);}
+.nav-logo-sub{font-size:.75rem;color:var(--text2);}
+.nav-tabs{display:flex;gap:2px;background:var(--bg3);border-radius:10px;padding:3px;}
+.nav-tab{padding:6px 18px;border-radius:8px;font-size:.82rem;font-weight:600;
+  color:var(--text2);cursor:pointer;transition:all .18s;border:none;background:none;}
+.nav-tab:hover{color:var(--text);background:rgba(255,255,255,.7);}
+.nav-tab.active{background:#fff;color:var(--accent);box-shadow:0 1px 4px rgba(0,0,0,.08);}
+
+/* SECTIONS */
+section{display:none;min-height:100vh;padding:80px 3.5rem 5rem;position:relative;}
+section.active{display:block;}
+.inner{max-width:1040px;margin:0 auto;}
+
+/* TYPOGRAPHY */
+.chip{display:inline-flex;align-items:center;gap:6px;
+  background:var(--accent-light);color:var(--accent);
+  border-radius:100px;padding:4px 12px;font-size:.72rem;font-weight:700;
+  letter-spacing:.4px;text-transform:uppercase;margin-bottom:1.4rem;}
+.chip.green{background:var(--green-light);color:var(--green);}
+.chip.amber{background:var(--amber-light);color:var(--amber);}
+.chip.purple{background:var(--purple-light);color:var(--purple);}
+h1.hero-h{font-size:clamp(2.4rem,4.5vw,3.6rem);font-weight:800;
+  letter-spacing:-1.5px;line-height:1.08;margin-bottom:1rem;color:var(--text);}
+h1.hero-h em{font-style:normal;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.lead{font-size:1.02rem;color:var(--text2);max-width:520px;line-height:1.75;margin-bottom:2.5rem;}
+.section-title {font-size:1.8rem;font-weight:800;margin-bottom:2rem;color:var(--text);border-left:5px solid var(--accent);padding-left:15px;}
+
+/* LƯỚI DANH SÁCH DỰ ÁN (PROJECTS GRID) */
+.projects-grid {display:grid;grid-template-columns:repeat(auto-fill, minmax(310px, 1fr));gap:1.5rem;margin-bottom:2rem;}
+.project-card {background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;box-shadow:var(--shadow);transition:all .25s ease;display:flex;flex-direction:column;justify-content:space-between;}
+.project-card:hover {transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:var(--border2);}
+.card-top h3 {font-size:1.05rem;font-weight:700;color:var(--text);margin-bottom:0.5rem;display:flex;align-items:center;gap:10px;}
+.card-top h3 i {color:var(--accent);}
+.card-top p {font-size:0.83rem;color:var(--text2);line-height:1.6;margin-bottom:1rem;}
+.btn-project {display:inline-flex;align-items:center;gap:8px;background:var(--accent-light);border:1px solid rgba(37,99,235,0.15);padding:8px 16px;border-radius:30px;font-weight:600;font-size:0.8rem;color:var(--accent);cursor:pointer;transition:all 0.2s;align-self:flex-start;}
+.btn-project:hover {background:var(--accent);color:#fff;}
+
+/* VÙNG HIỂN THỊ BÀI VIẾT TRỰC TIẾP (FULL CONTENT AREA) */
+#full-article-viewer {display:none;background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:2.5rem;box-shadow:var(--shadow-md);margin-top:1rem;}
+.btn-back {display:inline-flex;align-items:center;gap:8px;background:var(--bg3);border:none;padding:8px 16px;border-radius:30px;font-weight:600;font-size:0.82rem;color:var(--text2);cursor:pointer;margin-bottom:1.5rem;transition:all 0.2s;}
+.btn-back:hover {background:var(--border2);color:var(--text);}
+
+/* CẤU TRÚC NỘI DUNG VĂN BẢN TRONG BÀI VIẾT CHÈN */
+.pbox{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:1.4rem;margin-bottom:1.2rem;}
+.pbox h4{font-size:.85rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.8rem;border-bottom:1px solid var(--border);padding-bottom:5px;}
+.pbox p,.pbox li{font-size:.88rem;color:var(--text2);line-height:1.75;}
+.pbox ul, .pbox ol{margin-left:1.4rem;margin-top:0.4rem;}
+.pbox li{margin-bottom:6px;}
+.pbox code{font-family:monospace;background:var(--bg3);border-radius:4px;padding:2px 6px;font-size:.88em;color:var(--red);font-weight:600;}
+.result-strip{background:var(--green-light);border:1px solid #bbf7d0;border-radius:var(--radius-sm);padding:1.2rem;margin-top:1rem;}
+.result-strip .rs-label{font-size:.72rem;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.4rem;}
+.result-strip p{font-size:.88rem;color:#065f46;line-height:1.75;}
+
+/* TAGS & DATA */
+.tag{display:inline-block;font-size:.68rem;font-weight:700;padding:3px 9px;border-radius:100px;letter-spacing:.2px;margin-bottom:5px;}
+.t-blue{background:var(--accent-light);color:var(--accent);}
+.t-green{background:var(--green-light);color:#059669;}
+.t-amber{background:var(--amber-light);color:#d97706;}
+.t-red{background:var(--red-light);color:#dc2626;}
+.t-purple{background:var(--purple-light);color:#6d28d9;}
+.t-gray{background:var(--bg3);color:var(--text2);}
+
+.search-ops{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.5rem;}
+.sop{background:var(--accent-light);color:var(--accent);border-radius:5px;padding:2px 9px;font-size:.75rem;font-weight:700;font-family:monospace;}
+
+.ptable{width:100%;border-collapse:collapse;font-size:.82rem;margin:15px 0;background:#fff;}
+.ptable th{background:var(--bg3);color:var(--text);font-weight:700;text-align:left;padding:.7rem .8rem;font-size:.75rem;text-transform:uppercase;letter-spacing:.3px;border:1px solid var(--border);}
+.ptable td{padding:.7rem .8rem;border:1px solid var(--border);color:var(--text2);vertical-align:top;line-height:1.6;}
+
+.tree{font-family:monospace;font-size:.85rem;line-height:1.9;background:var(--bg);border-radius:var(--radius-sm);padding:1rem;color:var(--text2);border:1px solid var(--border);}
+.tree .hl{color:var(--accent);font-weight:600;}
+
+/* PAGE 1 & PAGE 3 INFRASTRUCTURE */
+.hero-layout{display:grid;grid-template-columns:1fr 220px;gap:3rem;align-items:start;margin-bottom:3rem;}
+.avatar-card{background:linear-gradient(145deg,var(--accent),var(--accent2));border-radius:20px;padding:2.5rem 1.5rem;text-align:center;color:#fff;box-shadow:var(--shadow-md);}
+.av-initials{font-size:2.8rem;font-weight:800;margin-bottom:.5rem;opacity:.95;}
+.av-name{font-size:.85rem;font-weight:700;margin-bottom:3px;}
+.av-sub{font-size:.72rem;opacity:.75;line-height:1.5;}
+.av-badge{display:inline-block;background:rgba(255,255,255,.2);border-radius:100px;padding:3px 10px;font-size:.68rem;font-weight:700;margin-top:.8rem;}
+
+.info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-bottom:2rem;}
+.inf{background:#fff;border:1px solid var(--border);border-radius:var(--radius-sm);padding:.9rem 1.1rem;box-shadow:var(--shadow);}
+.inf .lbl{font-size:.68rem;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:3px;font-weight:600;}
+.inf .val{font-size:.88rem;font-weight:700;color:var(--text);}
+
+.stats-row{display:flex;gap:0;margin-bottom:2.5rem;background:#fff;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);}
+.st{flex:1;padding:1.4rem;text-align:center;border-right:1px solid var(--border);}
+.st:last-child{border-right:none;}
+.st .n{font-size:2rem;font-weight:800;color:var(--accent);font-variant-numeric:tabular-nums;}
+.st .l{font-size:.72rem;color:var(--text2);margin-top:2px;font-weight:500;}
+
+.goals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem;}
+.goal{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:1.4rem;box-shadow:var(--shadow);}
+.goal-num{font-size:.68rem;font-weight:800;color:var(--accent);background:var(--accent-light);width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;margin-bottom:.8rem;}
+.goal h3{font-size:.88rem;font-weight:700;margin-bottom:.4rem;}
+.goal p{font-size:.78rem;color:var(--text2);line-height:1.6;}
+
+.ptags-box{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:1.4rem;box-shadow:var(--shadow);margin-bottom:2.5rem;}
+.ptags-box h3{font-size:.8rem;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:1rem;}
+.ptags{display:flex;flex-wrap:wrap;gap:.5rem;}
+.pt{background:var(--bg3);border:1px solid var(--border);border-radius:100px;padding:5px 13px;font-size:.78rem;color:var(--text2);font-weight:500;}
+
+.sk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-bottom:2rem;}
+.sk{background:#fff;border:1px solid var(--border);border-radius:var(--radius-sm);padding:1rem 1.2rem;box-shadow:var(--shadow);}
+.sk-name{font-size:.82rem;font-weight:700;margin-bottom:7px;}
+.sk-bg{height:4px;background:var(--bg3);border-radius:100px;overflow:hidden;}
+.sk-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--accent),var(--accent2));}
+.sk-meta{display:flex;justify-content:space-between;margin-top:5px;}
+.sk-lv{font-size:.69rem;color:var(--text3);}
+.sk-pct{font-size:.69rem;color:var(--accent);font-weight:700;}
+
+.proud-box{background:linear-gradient(135deg,#eff6ff,#f0fdf4);border:1px solid #bfdbfe;border-radius:var(--radius);padding:1.8rem;margin-bottom:2rem;}
+.proud-box h2{font-size:.82rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.5px;margin-bottom:1.2rem;}
+.proud-items{display:flex;flex-direction:column;gap:.8rem;}
+.pr-proud{display:grid;grid-template-columns:36px 1fr;gap:.8rem;align-items:start;background:#fff;border-radius:var(--radius-sm);padding:1rem 1.2rem;border:1px solid var(--border);}
+.pri-icon{font-size:1.2rem;margin-top:1px;}
+.pri-t strong{display:block;font-size:.85rem;font-weight:700;color:var(--text);margin-bottom:3px;}
+.pri-t p{font-size:.79rem;color:var(--text2);line-height:1.65;}
+
+.future-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem;}
+.fut{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:1.4rem;box-shadow:var(--shadow);transition:all .2s;}
+.fut-ic{font-size:1.4rem;margin-bottom:.6rem;}
+.fut h3{font-size:.87rem;font-weight:700;margin-bottom:.4rem;}
+.fut p{font-size:.77rem;color:var(--text2);line-height:1.6;}
+
+.ch-list{display:flex;flex-direction:column;gap:.8rem;margin-bottom:2rem;}
+.ch{display:grid;grid-template-columns:36px 1fr 1fr;gap:1rem;align-items:start;background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:1.2rem;box-shadow:var(--shadow);}
+.ch-n{font-size:1.3rem;font-weight:800;color:var(--amber);opacity:.5;line-height:1;}
+.ch h4{font-size:.82rem;font-weight:700;margin-bottom:4px;}
+.ch .cp{font-size:.77rem;color:var(--text2);line-height:1.55;}
+.ch-sol{background:var(--green-light);border-radius:var(--radius-sm);padding:.8rem;}
+.ch-sol .cs-lbl{font-size:.68rem;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;}
+.ch-sol .cp{color:#065f46;}
+
+footer{text-align:center;padding:2rem;border-top:1px solid var(--border);margin-top:3rem;color:var(--text3);font-size:.77rem;line-height:1.8;}
+footer strong{color:var(--text2);}
+
+.blob{position:fixed;border-radius:50%;pointer-events:none;z-index:0;opacity:.35;}
+.b1{width:600px;height:600px;background:radial-gradient(circle,#dbeafe,transparent 70%);top:-200px;right:-200px;}
+.b2{width:500px;height:500px;background:radial-gradient(circle,#d1fae5,transparent 70%);bottom:-150px;left:-150px;}
+section,.nav-tabs,nav{position:relative;z-index:1;}
+</style>
+</head>
+<body>
+<div class="blob b1"></div>
+<div class="blob b2"></div>
+
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-dot">NTS</div>
+    <div><div class="nav-logo-name">Nguyễn Trường Sơn</div><div class="nav-logo-sub">Portfolio</div></div>
+  </div>
+  <div class="nav-tabs">
+    <div class="nav-tab active" onclick="go('p1',this)">Giới thiệu</div>
+    <div class="nav-tab" onclick="go('p2',this)">Dự án</div>
+    <div class="nav-tab" onclick="go('p3',this)">Tổng kết</div>
+  </div>
+</nav>
+
+<section id="p1" class="active"><div class="inner">
+  <div class="hero-layout">
+    <div>
+      <h1 class="hero-h">Xin chào,<br>tôi là <em>Nguyễn Trường Sơn</em></h1>
+      <p class="lead">Sinh viên năm nhất ngành <strong>Kỹ thuật Robot</strong> – Trường Đại học Công nghệ, ĐHQGHN. Đam mê lập trình nhúng, hệ thống tự động và ứng dụng AI có trách nhiệm.</p>
+    </div>
+    <div class="avatar-card">
+      <div class="av-initials">NTS</div>
+      <div class="av-name">Nguyễn Trường Sơn</div>
+      <div class="av-sub">MSSV: 25023662<br>Sinh năm 2007</div>
+      <div class="av-badge">K70 · Robot Engineering</div>
+    </div>
+  </div>
+
+  <div class="info-grid">
+    <div class="inf"><div class="lbl">Họ và tên</div><div class="val">Nguyễn Trường Sơn</div></div>
+    <div class="inf"><div class="lbl">Mã sinh viên</div><div class="val">25023662</div></div>
+    <div class="inf"><div class="lbl">Năm sinh</div><div class="val">2007</div></div>
+    <div class="inf"><div class="lbl">Ngành học</div><div class="val">Kỹ thuật Robot</div></div>
+    <div class="inf"><div class="lbl">Khóa</div><div class="val">K70</div></div>
+    <div class="inf"><div class="lbl">Trường</div><div class="val">ĐH Công nghệ – ĐHQGHN</div></div>
+  </div>
+
+  <div class="stats-row">
+    <div class="st"><div class="n">7</div><div class="l">Sản phẩm hoàn thành</div></div>
+    <div class="st"><div class="n">4</div><div class="l">Module học số</div></div>
+    <div class="st"><div class="n">3</div><div class="l">Công cụ AI khai thác</div></div>
+    <div class="st"><div class="n">7</div><div class="l">Nguyên tắc liêm chính</div></div>
+  </div>
+
+  <div class="chip">🎯 Mục tiêu học tập & định hướng</div>
+  <div class="goals-grid">
+    <div class="goal">
+      <div class="goal-num">01</div>
+      <h3>Nền tảng kỹ thuật vững chắc</h3>
+      <p>Nắm vững lập trình nhúng (Arduino, ESP32), điều khiển cảm biến và actuator, xây dựng nền tảng phát triển robot tự động.</p>
+    </div>
+    <div class="goal">
+      <div class="goal-num">02</div>
+      <h3>Sử dụng AI có trách nhiệm</h3>
+      <p>Kết hợp tư duy phê phán với sức mạnh AI – dùng AI như gia sư hỗ trợ học tập, luôn minh bạch và khai báo rõ ràng.</p>
+    </div>
+    <div class="goal">
+      <div class="goal-num">03</div>
+      <h3>Kỹ năng số & làm việc nhóm</h3>
+      <p>Thành thạo công cụ quản lý dự án số (Trello, Drive, Docs), xây dựng kỹ năng hợp tác và giải quyết vấn đề kỹ thuật.</p>
+    </div>
+  </div>
+</div></section>
+
+<section id="p2"><div class="inner">
+  <div class="chip">📂 Sản phẩm môn học</div>
+  <div class="section-title">Kho sản phẩm & Bài tập Kỹ năng số</div>
+  
+  <div class="projects-grid" id="projects-list-grid">
+    
+    <div class="project-card">
+      <div class="card-top">
+        <span class="tag t-blue">Bài tập 1</span>
+        <h3><i class="fa-solid fa-folder-tree"></i> Quản lý tệp & thư mục</h3>
+        <p>Thực hành hệ thống hóa 12 thao tác cấu trúc tài nguyên trên Windows File Explorer.</p>
+      </div>
+      <button class="btn-project" onclick="showArticle('art1')">Xem báo cáo bài viết <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+
+    <div class="project-card">
+      <div class="card-top">
+        <span class="tag t-blue">Bài tập 2 · Bài 2</span>
+        <h3><i class="fa-solid fa-search"></i> Khai thác dữ liệu Robot</h3>
+        <p>Chiến lược truy vấn toán tử học thuật và bảng ma trận đánh giá độ tin cậy 6 nguồn khoa học.</p>
+      </div>
+      <button class="btn-project" onclick="showArticle('art2')">Xem báo cáo bài viết <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+
+    <div class="project-card">
+      <div class="card-top">
+        <span class="tag t-purple">Bài tập 2 · Bài 3</span>
+        <h3><i class="fa-solid fa-brain"></i> Kỹ nghệ Prompt AI</h3>
+        <p>Thực nghiệm ma trận đối sánh 3 cấp độ câu lệnh hỗ trợ tối ưu các tác vụ nghiên cứu.</p>
+      </div>
+      <button class="btn-project" onclick="showArticle('art3')">Xem báo cáo bài viết <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+
+    <div class="project-card">
+      <div class="card-top">
+        <span class="tag t-amber">Bài tập 3 · Bài 4</span>
+        <h3><i class="fa-solid fa-microchip"></i> Smart Bin IoT</h3>
+        <p>Mã nguồn C++ Arduino điều khiển ESP32-S3 và nhật ký hợp tác số qua bảng Trello.</p>
+      </div>
+      <button class="btn-project" onclick="showArticle('art4')">Xem báo cáo bài viết <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+
+    <div class="project-card">
+      <div class="card-top">
+        <span class="tag t-red">Bài tập 2 · Bài 5</span>
+        <h3><i class="fa-solid fa-palette"></i> Sáng tạo AI Multimedia</h3>
+        <p>Quy trình phối hợp tuyến tính Claude, DALL-E 3 và Canva AI thiết kế slide Tràng An.</p>
+      </div>
+      <button class="btn-project" onclick="showArticle('art5')">Xem báo cáo bài viết <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+
+    <div class="project-card">
+      <div class="card-top">
+        <span class="tag t-green">Bài tập 4 · Bài 6</span>
+        <h3><i class="fa-solid fa-scale-balanced"></i> Trách nhiệm & Đạo đức AI</h3>
+        <p>Phân tích sâu sắc chiến lược quản lý AI vĩ mô của HUST và 7 cam kết vàng cá nhân.</p>
+      </div>
+      <button class="btn-project" onclick="showArticle('art6')">Xem báo cáo bài viết <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+
+    <div class="project-card">
+      <div class="card-top">
+        <span class="tag t-green">Bài tập bổ sung</span>
+        <h3><i class="fa-solid fa-battery-three-quarters"></i> Nghiên cứu Pin Graphene</h3>
+        <p>Ma trận trích xuất số liệu thực nghiệm khoa học từ 5 tạp chí quốc tế hàng đầu.</p>
+      </div>
+      <button class="btn-project" onclick="showArticle('art7')">Xem báo cáo bài viết <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+
+  </div>
+
+  <div id="full-article-viewer">
+    <button class="btn-back" onclick="hideArticle()"><i class="fa-solid fa-arrow-left"></i> ⬅ Quay lại danh sách dự án</button>
+    <div id="article-dynamic-content">
+      </div>
+  </div>
+
+</div></section>
+
+<section id="p3"><div class="inner">
+  <h1 class="hero-h" style="font-size:2.5rem;margin-bottom:.5rem;">Tổng kết & <em>Tự đánh giá</em></h1>
+  <p class="lead" style="margin-bottom:2rem;">Phân tích sâu sắc sự trưởng thành – kiến thức tích lũy, điểm tâm đắc nhất và cách áp dụng kỹ năng trong tương lai.</p>
+
+  <div class="r-grid">
+    <div class="r-card"><div class="r-icon">📚</div><h3>Kiến thức & kỹ năng đã học</h3><ul>
+      <li>Quản lý tệp tin có hệ thống với quy tắc đặt tên chuẩn hóa.</li>
+      <li>Khai thác thông tin học thuật với toán tử tìm kiếm nâng cao.</li>
+      <li>Prompt Engineering 3 cấp độ – từ cơ bản đến role prompting.</li>
+      <li>Lập trình nhúng ESP32 + Arduino trong dự án IoT thực tế.</li>
+      <li>Quy trình sáng tạo nội dung số với 3 công cụ AI.</li>
+      <li>Đạo đức và liêm chính học thuật trong kỷ nguyên AI.</li>
+      <li>Làm việc nhóm hiệu quả qua Trello, Google Workspace.</li>
+    </ul></div>
+    <div class="r-card"><div class="r-icon">🔑</div><h3>Bài học sâu sắc nhất</h3>
+      <p style="margin-bottom:.8rem;">AI là công cụ mạnh mẽ nhưng đòi hỏi người dùng có <strong>tư duy phê phán</strong> để đánh giá đầu ra, kỹ năng viết prompt hiệu quả, và quan trọng nhất – hiểu biết đủ sâu về chủ đề để nhận ra khi AI sai.</p>
+      <p>Kỹ năng quan trọng nhất trong kỷ nguyên AI không phải biết dùng từng tool, mà là biết <strong>đặt câu hỏi đúng</strong> và biết <strong>phán xét chất lượng</strong> đầu ra một cách có hệ thống.</p>
+    </div>
+  </div>
+
+  <h2 class="sec-h" style="margin-top:2rem;">Mức độ <em>thành thạo</em> các kỹ năng số</h2>
+  <div class="sk-grid">
+    <div class="sk"><div class="sk-name">Quản lý tệp tin & thư mục</div><div class="sk-bg"><div class="sk-fill" style="width:92%"></div></div><div class="sk-meta"><div class="sk-lv">Thành thạo</div><div class="sk-pct">92%</div></div></div>
+    <div class="sk"><div class="sk-name">Prompt Engineering</div><div class="sk-bg"><div class="sk-fill" style="width:82%"></div></div><div class="sk-meta"><div class="sk-lv">Tốt</div><div class="sk-pct">82%</div></div></div>
+    <div class="sk"><div class="sk-name">Sáng tạo nội dung với AI</div><div class="sk-bg"><div class="sk-fill" style="width:78%"></div></div><div class="sk-meta"><div class="sk-lv">Tốt</div><div class="sk-pct">78%</div></div></div>
+    <div class="sk"><div class="sk-name">Làm việc nhóm số</div><div class="sk-bg"><div class="sk-fill" style="width:76%"></div></div><div class="sk-meta"><div class="sk-lv">Tốt</div><div class="sk-pct">76%</div></div></div>
+  </div>
+
+  <footer>
+    Portfolio được xây dựng bởi <strong>Nguyễn Trường Sơn – MSSV: 25023662</strong><br>
+    Ngành Kỹ thuật Robot · Khóa K70 · Trường Đại học Công nghệ – ĐHQGHN · Năm học 2025–2026
+  </footer>
+</div></section>
+
+<script>
+// Khai báo cơ sở dữ liệu văn bản đầy đủ của từng file bài viết, không qua Drive
+const articlesData = {
+  art1: `
+    <span class="tag t-blue">Dự án 1 · Bài tập 1 · Windows OS</span>
+    <h2 class="sec-h" style="font-size:1.5rem; margin-bottom:1rem;">Toàn văn Báo cáo: Quản lý tệp tin và cấu trúc thư mục trên Windows</h2>
+    <div class="pbox">
+      <h4>📌 Mục tiêu nghiên cứu thực hành</h4>
+      <p>Làm chủ hệ thống tệp tin và thiết bị ngoại vi trên nền tảng Windows qua File Explorer, thiết lập cấu trúc phân tầng cây dữ liệu khoa học bám sát quy tắc PascalCase để quản lý dự án nhúng Robot hiệu quả.</p>
+    </div>
+    <div class="pbox">
+      <h4>🛠️ Quy trình thực hiện chi tiết 12 bước thao tác hệ thống</h4>
+      <ol>
+        <li><strong>Mở File Explorer:</strong> Kích hoạt bằng tổ hợp phím tắt nhanh <code>Windows + E</code> hoặc nhấn vào folder màu vàng trên thanh tác vụ.</li>
+        <li><strong>Truy cập không gian làm việc:</strong> Lựa chọn Documents làm phân vùng thực hành dữ liệu gốc.</li>
+        <li><strong>Khởi tạo cây thư mục:</strong> Nhấp chuột phải $\rightarrow$ New Folder $\rightarrow$ Định danh cấu trúc: <code>ThucHanh_NguyenTruongSon</code> theo chuẩn PascalCase.</li>
+        <li><strong>Vào thư mục làm việc:</strong> Click đúp vào thư mục vừa tạo để bắt đầu làm việc bên trong.</li>
+        <li><strong>Tạo tệp văn bản:</strong> Khởi tạo tệp tin ghi chép thô ban đầu mang tên <code>GhiChu.txt</code>.</li>
+        <li><strong>Kiểm soát thuộc tính đổi tên (Rename):</strong> Thực hiện phím tắt F2 đổi tên tệp sang cấu trúc rõ ràng: <code>GhiChuQuanTrong.txt</code>.</li>
+        <li><strong>Phân tầng thư mục con:</strong> Xây dựng thư mục con mang tên <code>TaiLieu</code> ngay bên trong folder gốc.</li>
+        <li><strong>Thao tác Sao chép (Copy & Paste):</strong> Dùng lệnh Sao chép (Ctrl + C) tệp ghi chú sang thư mục tài liệu con vừa tạo (Ctrl + V).</li>
+        <li><strong>Di chuyển tệp (Cut & Paste):</strong> Tạo tệp <code>DiChuyen.txt</code> ở thư mục gốc, dùng tổ hợp phím cắt di chuyển (Ctrl + X / Ctrl + V) để đưa tệp vào folder tài liệu.</li>
+        <li><strong>Xóa dữ liệu tạm thời (Delete):</strong> Chọn lệnh Delete đưa tệp quan trọng ở thư mục gốc vào Recycle Bin (Thùng rác hệ thống).</li>
+        <li><strong>Xóa vĩnh viễn dữ liệu cứng:</strong> Chọn tệp di chuyển trong thư mục TaiLieu, nhấn tổ hợp phím <code>Shift + Delete</code> để hủy trực tiếp không qua thùng rác.</li>
+        <li><strong>Phục hồi dữ liệu (Restore):</strong> Truy cập Recycle Bin từ Desktop, click chuột phải vào tệp <code>GhiChuQuanTrong.txt</code> chọn lệnh <code>Restore</code> để đưa tệp về vị trí ban đầu thành công.</li>
+      </ol>
+    </div>
+    <div class="pbox">
+      <h4>📐 Sơ đồ phân tầng cây tài nguyên số sau khi hoàn thành</h4>
+      <div class="tree">
+        📁 Documents/<br>
+        &nbsp;&nbsp;└── 📁 ThucHanh_NguyenTruongSon/<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── 📄 GhiChuQuanTrong.txt &nbsp;<span class="hl">[Đã Restore nguyên vẹn thuộc tính]</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── 📁 TaiLieu/<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── 📄 GhiChuQuanTrong.txt &nbsp;[Bản sao nhân bản hoàn thành]<br>
+      </div>
+    </div>
+  `,
+  art2: `
+    <span class="tag t-blue">Dự án 2 · Bài tập 2 · Khảo sát tài liệu khoa học</span>
+    <h2 class="sec-h" style="font-size:1.5rem; margin-bottom:1rem;">Toàn văn Báo cáo: Robot công nghiệp trong kỷ nguyên tự động hóa thông minh</h2>
+    <div class="pbox">
+      <h4>📌 Nội dung bài viết nghiên cứu vĩ mô</h4>
+      <p>Trong bối cảnh cách mạng công nghiệp 4.0, hệ thống cánh tay robot đóng vai trò là xương sống trong dây chuyền sản xuất tự động. Báo cáo phân tích sâu sắc cấu trúc kỹ thuật toán học, ứng dụng y tế, đời sống xã hội và xu hướng Cobots tích hợp sâu trí tuệ nhân tạo.</p>
+    </div>
+    <div class="pbox">
+      <h4>🔍 Ma trận từ khóa truy vấn toán tử nâng cao</h4>
+      <div class="search-ops">
+        <span class="sop">site:ieee.org "industrial robotics" filetype:pdf</span>
+        <span class="sop">intitle:"robotics and automation" after:2022</span>
+      </div>
+    </div>
+    <div class="pbox">
+      <h4>📊 Bảng đối sánh và đánh giá độ tin cậy của 6 nguồn tài liệu khoa học hàng đầu</h4>
+      <table class="ptable">
+        <thead>
+          <tr><th>Định danh tài liệu</th><th>Tác giả Chuyên gia</th><th>Nền tảng xuất bản</th><th>Phương pháp luận học thuật</th><th>Đánh giá nguồn</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Springer Handbook of Robotics</td><td>B. Siciliano, O. Khatib</td><td>Springer</td><td>Hệ thống hóa toàn bộ khung lý thuyết cơ học robot.</td><td><span class="tag t-green">Cực kỳ cao ⭐⭐⭐⭐⭐</span></td></tr>
+          <tr><td>End-to-End Deep Visuomotor</td><td>S. Levine et al.</td><td>JMLR</td><td>Thực nghiệm thuật toán học sâu kết hợp phản hồi thị giác máy tính.</td><td><span class="tag t-green">Cực kỳ cao ⭐⭐⭐⭐⭐</span></td></tr>
+          <tr><td>Vision for robotics</td><td>D. Kragic, M. Vincze</td><td>IEEE Xplore</td><td>Giải thuật xử lý ảnh phục vụ robot nhận diện không gian.</td><td><span class="tag t-blue">Uy tín cao ⭐⭐⭐⭐</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  `,
+  art3: `
+    <span class="tag t-purple">Dự án 3 · Bài tập 2 · Prompt Engineering</span>
+    <h2 class="sec-h" style="font-size:1.5rem; margin-bottom:1rem;">Toàn văn Báo cáo: Ứng dụng Kỹ nghệ Prompt tối ưu hóa tác vụ học tập học thuật</h2>
+    <div class="pbox">
+      <h4>📊 Ma trận so sánh thực nghiệm 3 cấp độ thiết kế câu lệnh câu lệnh AI</h4>
+      <table class="ptable">
+        <thead>
+          <tr><th>Danh mục Tác vụ</th><th>Cú pháp lệnh Cơ Bản</th><th>Cú pháp lệnh Cải Tiến</th><th>Cú pháp lệnh Nâng Cao (Full Ràng Buộc)</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Tác vụ 1: Tóm tắt bài báo lao động</strong></td>
+            <td>"Hãy tóm tắt bài viết này..."</td>
+            <td>Yêu cầu tóm tắt phân tách rõ thành 3 đoạn bối cảnh, thực trạng, giải pháp.</td>
+            <td>Đóng vai giảng viên UET + Khóa định dạng bullet points + Ràng buộc dữ liệu định lượng số liệu gốc + Giới hạn dung lượng dưới 200 từ.</td>
+          </tr>
+          <tr>
+            <td><strong>Tác vụ 2: Giảng giải Machine Learning</strong></td>
+            <td>"Machine Learning là gì?"</td>
+            <td>Giải thích khái niệm theo 4 khía cạnh cụ thể: định nghĩa, phân loại, quy trình, ứng dụng.</td>
+            <td>Gán vai Trưởng khoa CNTT trường UET + Sử dụng phương pháp ẩn dụ thực tế + Đối sánh bảng ưu nhược điểm học có giám sát + Câu hỏi mở tư duy.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="pbox">
+      <h4>🧠 Đúc kết nguyên lý hệ thống</h4>
+      <p>Cấu trúc Prompt nâng cao cho hiệu năng tối ưu nhất nhờ việc phối hợp chặt chẽ: Gán vai trò cụ thể (Role Prompting) $\rightarrow$ Định hình khuôn mẫu đầu ra (Structured Output) $\rightarrow$ Thiết lập các biên tham số khống chế chống lỗi ảo tưởng của AI.</p>
+    </div>
+  `,
+  art4: `
+    <span class="tag t-amber">Dự án 4 · Bài tập 3 · Thiết kế nhúng IoT</span>
+    <h2 class="sec-h" style="font-size:1.5rem; margin-bottom:1rem;">Toàn văn Hồ sơ Kỹ thuật: Thiết bị Thùng rác thông minh nhóm – Summable Smart Bin</h2>
+    <div class="pbox">
+      <h4>💻 Khối lượng mã nguồn lập trình Arduino hoàn chỉnh (Firmware C++ Code)</h4>
+      <pre style="background: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 0.85rem; overflow-x: auto; border: 1px solid #333; line-height:1.5;">
+#include &lt;Servo.h&gt;
+const int TRIG_PIN = 5; const int ECHO_PIN = 6; const int SERVO_PIN = 9;
+Servo binServo; long duration; int distance;
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(TRIG_PIN, OUTPUT); pinMode(ECHO_PIN, INPUT);
+  binServo.attach(SERVO_PIN); binServo.write(0);
+}
+void loop() {
+  digitalWrite(TRIG_PIN, LOW); delayMicroseconds(2);
+  digitalWrite(TRIG_PIN, HIGH); delayMicroseconds(10);
+  digitalWrite(TRIG_PIN, LOW);
+  duration = pulseIn(ECHO_PIN, HIGH); distance = duration * 0.034 / 2;
+  
+  if (distance < 30) { // Vật cản đến gần dưới 30cm
+    binServo.write(90); delay(4000); binServo.write(0);
+  }
+  delay(100);
+}</pre>
+    </div>
+    <div class="pbox">
+      <h4>🌐 Nhật ký cộng tác điều hành số phi tập trung của nhóm</h4>
+      <ul>
+        <li><strong>Trello Board (Kanban):</strong> Quản lý tiến độ chia việc theo thẻ trạng thái trực quan tại link <code>trello.com/b/perHcNmM/code</code>, kiểm soát mốc thời gian hạn định nộp bài ngày 1/5/2026.</li>
+        <li><strong>Google Docs & Drive:</strong> Soạn thảo đồng thời văn bản báo cáo mạch nhúng và đồng bộ thư mục code chứa tệp tin firmware định dạng .ino.</li>
+      </ul>
+    </div>
+  `,
+  art5: `
+    <span class="tag t-red">Dự án 5 · Bài tập 2 · Sáng tạo nội dung Multimedia</span>
+    <h2 class="sec-h" style="font-size:1.5rem; margin-bottom:1rem;">Toàn văn Quy trình: Sản xuất ấn phẩm Slide Di sản Tràng An UNESCO bằng chuỗi 3 AI</h2>
+    <div class="pbox">
+      <h4>⚡ Quy trình công nghệ phi tuyến tính phối hợp đa công cụ thông minh</h4>
+      <ol>
+        <li><strong>Claude AI (Lõi nội dung):</strong> Nhận prompt nâng cao đóng vai chuyên gia di sản sinh toàn văn văn bản nội dung chi tiết kịch bản văn học cho cấu trúc mạch lạc 11 slide.</li>
+        <li><strong>DALL-E 3 (Sinh ảnh nghệ thuật):</strong> Biên dịch mô tả bối cảnh karst Ninh Bình sang từ khóa tiếng Anh kỹ thuật nhiếp ảnh tỷ lệ 16:9 siêu thực (Ultra-realistic view).</li>
+        <li><strong>Canva AI (Layout & Graphic):</strong> Sử dụng tính năng thông minh Magic Design đề xuất mẫu template hiện đại và Magic Eraser tách phông nền thuyền nan lồng ghép đồ họa mượt mà, cắt giảm thời gian thiết kế từ 2 ngày xuống 6 giờ thực tế.</li>
+      </ol>
+    </div>
+  `,
+  art6: `
+    <span class="tag t-green">DỰ ÁN 6 · Bài tập 4 · Liêm chính Đạo đức AI</span>
+    <h2 class="sec-h" style="font-size:1.5rem; margin-bottom:1rem;">Toàn văn Bài luận: Chiến lược quản lý AI vĩ mô và 7 Nguyên tắc vàng liêm chính cá nhân</h2>
+    <div class="pbox">
+      <h4>🏛️ Khảo sát 5 Định hướng chiến lược Trí tuệ nhân tạo của ĐHBK Hà Nội (HUST - 4/2026)</h4>
+      <ul>
+        <li><strong>Đổi mới cốt lõi học phần:</strong> Đưa cấu trúc học phần tư duy phê phán AI thành môn học bắt buộc hệ chính quy.</li>
+        <li><strong>Dịch chuyển vai trò Giảng dạy:</strong> Biến đổi Giảng viên thành thực thể Mentor điều phối dẫn dắt tư duy gốc tự thân của sinh viên.</li>
+        <li><strong>Cách mạng kiểm tra đánh giá:</strong> Triệt tiêu thi cử học thuộc ngắn hạn, tăng cường bảo vệ đồ án mạch phần cứng thực tế và phỏng vấn vấn đáp trực tiếp chống hành vi copy thô từ AI.</li>
+        <li><strong>Hạ tầng số AI4LIFE:</strong> Vận hành trường thông minh số gắn liền với thành tựu của Viện Nghiên cứu Ứng dụng Trí tuệ Nhân tạo AI4LIFE (Thành lập từ năm 2024).</li>
+      </ul>
+    </div>
+    <div class="pbox">
+      <h4>📜 Bộ cam kết 7 quy chuẩn hành vi ứng xử cá nhân của sinh viên Nguyễn Trường Sơn</h4>
+      <p>1. <strong>Minh bạch (Transparency):</strong> Khai báo rõ ràng tên mô hình, phiên bản và % AI hỗ trợ trong phụ lục mọi bài tập bài nộp.<br>
+      2. <strong>Tư duy phản biện độc lập:</strong> Tiến hành quy trình Fact-check kiểm chứng lỗi ảo tưởng (Hallucination) dữ liệu của AI.<br>
+      3. <strong>AI là Mentor:</strong> Tự suy nghĩ tìm giải pháp giải thuật tối thiểu 20-30 phút trước khi tra cứu hỏi đáp công cụ số.<br>
+      4. <strong>Tôn trọng sở hữu trí tuệ:</strong> Tái cấu trúc và diễn đạt hoàn toàn bằng văn phong, lập luận mang bản sắc ngôn từ riêng cá nhân.</p>
+    </div>
+  `,
+  art7: `
+    <span class="tag t-green">Dự án 7 · Tổng quan tài liệu khoa học khoa học chuyên sâu</span>
+    <h2 class="sec-h" style="font-size:1.5rem; margin-bottom:1rem;">Toàn văn Báo cáo: Khảo sát Ứng dụng vật liệu Graphene trong công nghệ Pin Lithium-ion</h2>
+    <div class="pbox">
+      <h4>🔬 Hệ thống số liệu trích xuất thực nghiệm từ 5 công trình quốc tế danh mục Scopus Q1 (2024–2025)</h4>
+      <table class="ptable">
+        <thead>
+          <tr><th>Tạp chí khoa học</th><th>Phương pháp thực nghiệm</th><th>Hệ thống số liệu kết quả thực nghiệm chi tiết</th><th>Luận điểm kết luận gốc</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>J. Physics & Chemistry (2025)</td><td>Phóng sạc dòng cao trên màng graphene bốc bay hóa học CVD.</td><td>Dung lượng lý thuyết điện cực đạt mốc **~744 mAh/g**. Tốc độ truyền dẫn ion Li⁺ sạc nhanh tăng **2,5×**.</td><td>Vượt qua hoàn toàn ngưỡng nghẽn giới hạn dung lượng của graphite truyền thống (372 mAh/g).</td></tr>
+          <tr><td>ScienceDirect (2025)</td><td>Bắn laser trực tiếp tạo màng xốp carbon điện cực 3D (LIG).</td><td>Mạch điện cực Anode PES-rGO-LIG bảo toàn **91,09% dung lượng hoạt động hiệu dụng** sau chuỗi **300 chu kỳ sạc**.</td><td>Kiến trúc không gian 3D triệt tiêu hiện tượng đứt gãy, biến dạng cơ học khi ion Lithium co giãn thể tích mạnh.</td></tr>
+          <tr><td>Scientific Reports - Nature (2025)</td><td>Mô phỏng điện hóa biến thiên dòng xả cao (0,2C - 3C) trên pack pin xe điện EV thực tế.</td><td>Màng phủ khuếch tán nhiệt mở rộng ngưỡng xảy ra sự cố cháy nổ nhiệt tới hạn (Thermal Runaway) lên mức **180°C – 220°C**.</td><td>Gia tăng biên độ an toàn nhiệt độ tổng thể thêm **40°C**, giải quyết bài toán rủi ro lớn nhất của hạ tầng pin xe điện hiện đại.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  `
+};
+
+// Hàm điều khiển chính xác việc chuyển đổi các Trang lớn trên thanh menu chính
+function go(id,el){
+  document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  el.classList.add('active');
+  // Trở về mặc định ẩn trình xem bài viết khi đổi trang
+  hideArticle();
+  window.scrollTo(0,0);
+}
+
+// Hàm bung toàn văn bài viết chi tiết trực tiếp ngay trên trang Dự án
+function showArticle(articleKey) {
+  const grid = document.getElementById('projects-list-grid');
+  const viewer = document.getElementById('full-article-viewer');
+  const contentContainer = document.getElementById('article-dynamic-content');
+  
+  if (articlesData[articleKey]) {
+    contentContainer.innerHTML = articlesData[articleKey];
+    grid.style.display = 'none'; // Ẩn lưới danh sách card gốc đi
+    viewer.style.display = 'block'; // Bung toàn văn bài viết trực tiếp lên
+    window.scrollTo(0, 0);
+  }
+}
+
+// Hàm tắt bài viết chi tiết, quay lại lưới danh sách dự án ban đầu
+function hideArticle() {
+  const grid = document.getElementById('projects-list-grid');
+  const viewer = document.getElementById('full-article-viewer');
+  
+  if (grid && viewer) {
+    viewer.style.display = 'none';
+    grid.style.display = 'grid';
+  }
+}
+</script>
+</body>
+</html>
